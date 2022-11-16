@@ -12,6 +12,7 @@ public class Program {
 		//
 		Board board = new Board(8,8);
 		//
+		System.out.println();
 		ChessMatch chessmatch = new ChessMatch();
 		UI.printBoard(chessmatch.getPieces());
 	}
