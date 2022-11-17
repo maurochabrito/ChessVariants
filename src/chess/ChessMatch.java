@@ -53,6 +53,7 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source,target);
 		Piece capturedPiece = makeMove(source, target);
+		nextTurn();
 		return (ChessPiece)capturedPiece;
 	}
 	
@@ -84,7 +85,10 @@ public class ChessMatch {
 	private void placeNewPiece(char column, int row, ChessPiece Piece) {
 		board.placePiece(Piece, new ChessPosition(column,row).toPosition());
 	}
-	
+	private void nextTurn() {
+		turn++;
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+	}
 	public void initialSetup(){
 		//Rooks
 		placeNewPiece('a', 1, new Rook(board,Color.WHITE));
@@ -112,9 +116,5 @@ public class ChessMatch {
 			//placeNewPiece((char)('a'+i), 2, new Pawn(board,Color.WHITE));
 			placeNewPiece((char)('a'+i), 7, new Pawn(board,Color.BLACK));
 		}
-	}
-	private void nextTurn() {
-		turn++;
-		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 }
