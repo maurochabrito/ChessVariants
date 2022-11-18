@@ -145,7 +145,8 @@ public class ChessMatch {
 		turn++;
 		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
-	private Color opponent(Color color) {
+	//Shifted private to public to use it on UI class
+	public Color opponent(Color color) {
 		return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 	private ChessPiece king(Color color) {
