@@ -17,7 +17,17 @@ public class King extends ChessPiece{
 	
 	@Override
 	public String toString() {
-		return "K";
+		if (this.chessMatch.getCheck() == true && this.chessMatch.getCurrentPlayer() == this.getColor()) {
+			if (this.chessMatch.getCheckMate() == true) {
+				return "\u001B[41m"+"K"+"\u001B[40m";
+			}
+			else {
+				return "\u001B[41m"+"K"+"\u001B[40m";
+			}
+		}
+		else {
+			return "K";
+		}
 	}
 	private boolean canMove(Position position) {
 		ChessPiece p = (ChessPiece)getBoard().piece(position);
