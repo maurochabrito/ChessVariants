@@ -1,14 +1,20 @@
 package chess.pieces;
 
 import boardgame.Board;
+import boardgame.Piece;
 import boardgame.Position;
+import chess.ChessMatch;
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class Queen extends ChessPiece {
 
-	public Queen(Board board, Color color) {
+	private ChessMatch chessMatch;
+
+	public Queen(Board board, Color color, ChessMatch chessMatch) {
 		super(board, color);
+		this.chessMatch = chessMatch;
 	}
 
 	@Override
@@ -101,7 +107,7 @@ public class Queen extends ChessPiece {
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;
 		}
-
+		// Searching for illegal squares where they're inaccessible due to a check		
 		return mat;
 	}
 }

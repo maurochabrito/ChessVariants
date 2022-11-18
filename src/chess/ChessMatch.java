@@ -1,6 +1,5 @@
 package chess;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,7 +99,8 @@ public class ChessMatch {
 		}
 		return (ChessPiece)capturedPiece;
 	}
-	private void undoMove(Position source, Position target, Piece capturedPiece) {
+	//Changed to public from private
+	public void undoMove(Position source, Position target, Piece capturedPiece) {
 		ChessPiece p = (ChessPiece)board.removePiece(target);
 		p.decreaseMoveCount();
 		board.placePiece(p, source);
@@ -148,7 +148,7 @@ public class ChessMatch {
 			throw new IllegalStateException("There is no piece to be promoted");
 		}
 		if (!type.equals("B") && !type.equals("N") && !type.equals("R") & !type.equals("Q")) {
-			throw new InvalidParameterException("Invalid type for promotion");
+			return promoted;
 		}
 
 		Position pos = promoted.getChessPosition().toPosition();
@@ -165,10 +165,11 @@ public class ChessMatch {
 	private ChessPiece newPiece(String type, Color color) {
 		if (type.equals("B")) return new Bishop(board, color);
 		if (type.equals("N")) return new Knight(board, color);
-		if (type.equals("Q")) return new Queen(board, color);
+		if (type.equals("Q")) return new Queen(board, color, this);
 		return new Rook(board, color);
 	}
-	private Piece makeMove(Position source, Position target) {
+	//Changed from private to public
+	public Piece makeMove(Position source, Position target) {
 		ChessPiece p = (ChessPiece)board.removePiece(source);
 		p.increaseMoveCount();
 		Piece capturedPiece = board.removePiece(target);
@@ -302,8 +303,8 @@ public class ChessMatch {
 		placeNewPiece('c', 8, new Bishop(board,Color.BLACK));
 		placeNewPiece('f', 8, new Bishop(board,Color.BLACK));
 		//Queens
-		placeNewPiece('d', 1, new Queen(board,Color.WHITE));
-		placeNewPiece('d', 8, new Queen(board,Color.BLACK));
+		placeNewPiece('d', 1, new Queen(board,Color.WHITE, this));
+		placeNewPiece('d', 8, new Queen(board,Color.BLACK, this));
 		//Kings
 		placeNewPiece('e', 1, new King(board,Color.WHITE, this));
 		placeNewPiece('e', 8, new King(board,Color.BLACK, this));
