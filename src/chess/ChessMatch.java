@@ -17,16 +17,19 @@ import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 public class ChessMatch {
-	private Board board;
-	private int turn;
-	private Color currentPlayer;
-	private List<Piece> piecesOnTheBoard = new ArrayList<>();
-	private List<Piece> capturedPieces = new ArrayList<>();
-	private boolean check;
-	private boolean checkMate;
-	private ChessPiece enPassantVulnerable;
-	private ChessPiece promoted;
-
+	protected Board board;
+	protected int turn;
+	protected Color currentPlayer;
+	protected List<Piece> piecesOnTheBoard = new ArrayList<>();
+	protected List<Piece> capturedPieces = new ArrayList<>();
+	protected boolean check;
+	protected boolean checkMate;
+	protected ChessPiece enPassantVulnerable;
+	protected ChessPiece promoted;
+	
+	public ChessMatch(String msg) {
+		//This does nothing, it is only a constructor for chess variants
+	}
 	public ChessMatch() {
 		board = new Board(8, 8);
 		turn = 1;
