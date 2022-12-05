@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import chess.CapablancaChessMatch;
+import chess.CapablancaChessPosition;
 import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -23,7 +24,7 @@ public class Program {
 				System.out.println("Choose a Capablanca Chess initial setup (type the name):");
 				System.out.printf("%nAvaliable:%nGothic%n%n>> ");
 				String initialSetup = sc.nextLine();
-				ChessMatch chessMatch = new CapablancaChessMatch(initialSetup);
+				CapablancaChessMatch chessMatch = new CapablancaChessMatch(initialSetup);
 				List<ChessPiece> captured = new ArrayList<>();
 
 				while (!chessMatch.getCheckMate()) {
@@ -32,13 +33,13 @@ public class Program {
 						UI.printMatch(chessMatch, captured);
 						System.out.println();
 						System.out.print("Source: ");
-						ChessPosition source = UI.readCapablancaChessPosition(sc);
+						CapablancaChessPosition source = UI.readCapablancaChessPosition(sc);
 						boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 						UI.clearScreen();
 						UI.printBoard(chessMatch.getPieces(), possibleMoves);
 						System.out.println();
 						System.out.print("Target: ");
-						ChessPosition target = UI.readCapablancaChessPosition(sc);
+						CapablancaChessPosition target = UI.readCapablancaChessPosition(sc);
 						ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 						if (capturedPiece != null) {
 							captured.add(capturedPiece);

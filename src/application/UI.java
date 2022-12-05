@@ -50,7 +50,7 @@ public class UI {
 			throw new InputMismatchException("Error reading chess position. Valid values are from a1 to h8.");
 		}
 	}
-	public static ChessPosition readCapablancaChessPosition(Scanner sc) {
+	public static CapablancaChessPosition readCapablancaChessPosition(Scanner sc) {
 		try {
 			String s = sc.nextLine();
 			char column = s.charAt(0);

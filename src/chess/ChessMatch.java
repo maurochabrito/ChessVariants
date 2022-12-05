@@ -70,7 +70,6 @@ public class ChessMatch {
 		validateSourcePosition(position);
 		return board.piece(position).possibleMoves();
 	}
-	
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
@@ -184,9 +183,9 @@ public class ChessMatch {
 			capturedPieces.add(capturedPiece);
 		}
 		// #specialmove castling kingside rook
-		if (p instanceof King && target.getColumn() == source.getColumn() + 2) {
-			Position sourceT = new Position(source.getRow(), source.getColumn() + 3);
-			Position targetT = new Position(source.getRow(), source.getColumn() + 1);
+		if (p instanceof King && target.getColumn() == this.getRookInitialColumn("King")-1) {
+			Position sourceT = new Position(source.getRow(), this.getRookInitialColumn("King"));
+			Position targetT = new Position(source.getRow(), this.getRookInitialColumn("King")-2);
 			ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
 			board.placePiece(rook, targetT);
 			rook.increaseMoveCount();
@@ -290,6 +289,19 @@ public class ChessMatch {
 			}
 		}
 		return false;
+	}
+	public int getKingInitialColumn() {
+		return 4;
+	}
+	public int getRookInitialColumn(String side) {
+		if(side.equals("Queen")) {
+			return 100;
+		}
+		if(side.equals("King")) {
+			return 7;
+		}
+		//Stand
+		return 7;
 	}
 	public void initialSetup(){
 		//Chancellors
