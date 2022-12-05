@@ -134,15 +134,16 @@ public class King extends ChessPiece{
 						}
 					}
 					//Capablanca castling queenside rook
-					/*Position posT2 = new Position(position.getRow(), position.getColumn() - 4);
+					Position posT2 = new Position(position.getRow(), this.chessMatch.getRookInitialColumn("Queen"));
 					if (testRookCastling(posT2)) {
-						Position p1 = new Position(position.getRow(), position.getColumn() - 1);
-						Position p2 = new Position(position.getRow(), position.getColumn() - 2);
-						Position p3 = new Position(position.getRow(), position.getColumn() - 3);
-						if (getBoard().piece(p1) == null && getBoard().piece(p2) == null && getBoard().piece(p3) == null) {
-							mat[position.getRow()][position.getColumn() - 2] = true;
+						mat[position.getRow()][this.chessMatch.getRookInitialColumn("Queen")+2] = true;
+						for (int counter = 1; counter<kingColumn-posT2.getColumn(); counter++) {
+							Position pos = new Position(position.getRow(), this.chessMatch.getRookInitialColumn("Queen") +counter);
+							if(!(getBoard().piece(pos) == null)) {
+								mat[position.getRow()][position.getColumn() + (kingColumn-this.getBoard().getColumns())] = false;
+							}
 						}
-					}*/
+					}
 				}
 			}
 		}

@@ -121,9 +121,9 @@ public class CapablancaChessMatch extends ChessMatch{
 		}
 
 		// #specialmove castling queenside rook
-		if (p instanceof King && target.getColumn() == source.getColumn() - 2) {
-			Position sourceT = new Position(source.getRow(), source.getColumn() - 4);
-			Position targetT = new Position(source.getRow(), source.getColumn() - 1);
+		if (p instanceof King && target.getColumn() == this.getRookInitialColumn("Queen")+2) {
+			Position sourceT = new Position(source.getRow(), this.getRookInitialColumn("Queen"));
+			Position targetT = new Position(source.getRow(), this.getRookInitialColumn("Queen")+3);
 			ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
 			board.placePiece(rook, targetT);
 			rook.increaseMoveCount();
@@ -231,11 +231,11 @@ public class CapablancaChessMatch extends ChessMatch{
 	    placeNewPiece(n2, 8, new Knight(board,Color.BLACK));
 		//Archbishop and Chancellor
 	    //placeNewPiece(a, 1, new Archbishop(board,Color.WHITE));
-	    placeNewPiece(c, 1, new Chancellor(board,Color.WHITE));
+	    //placeNewPiece(c, 1, new Chancellor(board,Color.WHITE));
 	    placeNewPiece(a, 8, new Archbishop(board,Color.BLACK));
 	    placeNewPiece(c, 8, new Chancellor(board,Color.BLACK));
 		//Queen and King
-	    placeNewPiece(q, 1, new Queen(board,Color.WHITE, this));
+	    //placeNewPiece(q, 1, new Queen(board,Color.WHITE, this));
 	    placeNewPiece(k, 1, new King(board,Color.WHITE, this));
 	    placeNewPiece(q, 8, new Queen(board,Color.BLACK, this));
 	    placeNewPiece(k, 8, new King(board,Color.BLACK, this));
