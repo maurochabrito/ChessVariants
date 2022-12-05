@@ -129,7 +129,7 @@ public class King extends ChessPiece{
 						for (int counter = 1; counter<posT1.getColumn()-kingColumn; counter++) {
 							Position pos = new Position(position.getRow(), position.getColumn() +counter);
 							if(!(getBoard().piece(pos) == null)) {
-								mat[position.getRow()][position.getColumn() + (kingColumn-this.getBoard().getColumns())] = false;
+								mat[position.getRow()][this.chessMatch.getRookInitialColumn("King")-1] = false;
 							}
 						}
 					}
@@ -140,7 +140,7 @@ public class King extends ChessPiece{
 						for (int counter = 1; counter<kingColumn-posT2.getColumn(); counter++) {
 							Position pos = new Position(position.getRow(), this.chessMatch.getRookInitialColumn("Queen") +counter);
 							if(!(getBoard().piece(pos) == null)) {
-								mat[position.getRow()][position.getColumn() + (kingColumn-this.getBoard().getColumns())] = false;
+								mat[position.getRow()][this.chessMatch.getRookInitialColumn("Queen")+2] = false;
 							}
 						}
 					}

@@ -15,15 +15,18 @@ import chess.ChessPosition;
 public class Program {
 
 	public static void main(String[] args) {
+		UI.clearScreen();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose a Chess Variant to play (type the number):");
 		System.out.printf("%nAvaliable:%n(1) Capablanca's Chess%n%n>> ");
 		String variant = sc.nextLine();
+		UI.clearScreen();
 		switch(variant){
 			case "1":
-				System.out.println("Choose a Capablanca Chess initial setup (type the name):");
-				System.out.printf("%nAvaliable:%nGothic%n%n>> ");
+				System.out.println("Choose a Capablanca Chess initial setup (type the number):");
+				System.out.printf("%nAvaliable:%n(1) Gothic%n(2) Bird%n(3) Grotesque%n%n>> ");
 				String initialSetup = sc.nextLine();
+				UI.clearScreen();
 				CapablancaChessMatch chessMatch = new CapablancaChessMatch(initialSetup);
 				List<ChessPiece> captured = new ArrayList<>();
 

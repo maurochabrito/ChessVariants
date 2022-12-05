@@ -22,7 +22,7 @@ public class CapablancaChessMatch extends ChessMatch{
 		board = new Board(8, 10);
 		turn = 1;
 		currentPlayer = Color.WHITE;
-		this.setup = setup;
+		if (setup.hashCode() == "Bird".hashCode()) {this.setup = "Bird";}
 		initialSetup(setup);
 	}
 	@Override
@@ -102,54 +102,11 @@ public class CapablancaChessMatch extends ChessMatch{
 		board.placePiece(piece, new CapablancaChessPosition(column,row).toPosition());
 		piecesOnTheBoard.add(piece);
 	}
-	public Piece makeMove(Position source, Position target) {
-		ChessPiece p = (ChessPiece)board.removePiece(source);
-		p.increaseMoveCount();
-		Piece capturedPiece = board.removePiece(target);
-		board.placePiece(p, target);
-		if (capturedPiece != null) {
-			piecesOnTheBoard.remove(capturedPiece);
-			capturedPieces.add(capturedPiece);
-		}
-		// #specialmove castling kingside rook
-		if (p instanceof King && target.getColumn() == this.getRookInitialColumn("King")-1) {
-			Position sourceT = new Position(source.getRow(), this.getRookInitialColumn("King"));
-			Position targetT = new Position(source.getRow(), this.getRookInitialColumn("King")-2);
-			ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
-			board.placePiece(rook, targetT);
-			rook.increaseMoveCount();
-		}
-
-		// #specialmove castling queenside rook
-		if (p instanceof King && target.getColumn() == this.getRookInitialColumn("Queen")+2) {
-			Position sourceT = new Position(source.getRow(), this.getRookInitialColumn("Queen"));
-			Position targetT = new Position(source.getRow(), this.getRookInitialColumn("Queen")+3);
-			ChessPiece rook = (ChessPiece)board.removePiece(sourceT);
-			board.placePiece(rook, targetT);
-			rook.increaseMoveCount();
-		}
-		// #specialmove en passant
-		if (p instanceof Pawn) {
-			if (source.getColumn() != target.getColumn() && capturedPiece == null) {
-				Position pawnPosition;
-				if (p.getColor() == Color.WHITE) {
-					pawnPosition = new Position(target.getRow() + 1, target.getColumn());
-				}
-				else {
-					pawnPosition = new Position(target.getRow() - 1, target.getColumn());
-				}
-				capturedPiece = board.removePiece(pawnPosition);
-				capturedPieces.add(capturedPiece);
-				piecesOnTheBoard.remove(capturedPiece);
-			}
-		}
-		return capturedPiece;
-	}
 	@Override
 	public int getKingInitialColumn() {
 		int column = 5;//Standard is Gothic 'f' column
 		switch (this.setup) {
-		case "Gothic":
+		case ("Gothic"):
 			column = 5;
 		break;
 		case "Bird":
@@ -199,19 +156,22 @@ public class CapablancaChessMatch extends ChessMatch{
 			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';
 			n1 = 'b';n2 = 'i';a = 'g';c = 'e';
 			q = 'd';k = 'f';
+		break;
 		case "Bird":
 			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';
 			n1 = 'b';n2 = 'i';a = 'g';c = 'd';
 			q = 'e';k = 'f';
+		break;
 		case "Grotesque":
 			r1 = 'a';r2 = 'j';b1 = 'b';b2 = 'i';
 			n1 = 'd';n2 = 'g';a = 'h';c = 'f';
 			q = 'c';k = 'e';
+		break;
 		default:
 			//Gothic was chosen for the standard
 			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';
-			n1 = 'b';n2 = 'i';a = 'g';c = 'e';
-			q = 'd';k = 'f';
+			n1 = 'b';n2 = 'i';a = 'g';c = 'd';
+			q = 'e';k = 'f';
 		break;
 		}
 		//Rooks
@@ -220,22 +180,22 @@ public class CapablancaChessMatch extends ChessMatch{
 	    placeNewPiece(r1, 8, new Rook(board,Color.BLACK));
 	    placeNewPiece(r2, 8, new Rook(board,Color.BLACK));
 		//Bishops
-	    //placeNewPiece(b1, 1, new Bishop(board,Color.WHITE));
-	    //placeNewPiece(b2, 1, new Bishop(board,Color.WHITE));
+	    placeNewPiece(b1, 1, new Bishop(board,Color.WHITE));
+	    placeNewPiece(b2, 1, new Bishop(board,Color.WHITE));
 	    placeNewPiece(b1, 8, new Bishop(board,Color.BLACK));
 	    placeNewPiece(b2, 8, new Bishop(board,Color.BLACK));
 		//Knights
-	    //placeNewPiece(n1, 1, new Knight(board,Color.WHITE));
-	    //placeNewPiece(n2, 1, new Knight(board,Color.WHITE));
+	    placeNewPiece(n1, 1, new Knight(board,Color.WHITE));
+	    placeNewPiece(n2, 1, new Knight(board,Color.WHITE));
 	    placeNewPiece(n1, 8, new Knight(board,Color.BLACK));
 	    placeNewPiece(n2, 8, new Knight(board,Color.BLACK));
 		//Archbishop and Chancellor
-	    //placeNewPiece(a, 1, new Archbishop(board,Color.WHITE));
-	    //placeNewPiece(c, 1, new Chancellor(board,Color.WHITE));
+	    placeNewPiece(a, 1, new Archbishop(board,Color.WHITE));
+	    placeNewPiece(c, 1, new Chancellor(board,Color.WHITE));
 	    placeNewPiece(a, 8, new Archbishop(board,Color.BLACK));
 	    placeNewPiece(c, 8, new Chancellor(board,Color.BLACK));
 		//Queen and King
-	    //placeNewPiece(q, 1, new Queen(board,Color.WHITE, this));
+	    placeNewPiece(q, 1, new Queen(board,Color.WHITE, this));
 	    placeNewPiece(k, 1, new King(board,Color.WHITE, this));
 	    placeNewPiece(q, 8, new Queen(board,Color.BLACK, this));
 	    placeNewPiece(k, 8, new King(board,Color.BLACK, this));
