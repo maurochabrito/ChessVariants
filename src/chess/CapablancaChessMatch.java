@@ -76,6 +76,14 @@ public class CapablancaChessMatch extends ChessMatch{
 			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';
 			n1 = 'b';n2 = 'i';a = 'g';c = 'e';
 			q = 'd';k = 'f';
+		case "Bird":
+			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';
+			n1 = 'b';n2 = 'i';a = 'g';c = 'd';
+			q = 'e';k = 'f';
+		case "Grotesque":
+			r1 = 'a';r2 = 'j';b1 = 'b';b2 = 'i';
+			n1 = 'd';n2 = 'g';a = 'h';c = 'f';
+			q = 'c';k = 'e';
 		default:
 			//Gothic was chosen for the standard
 			r1 = 'a';r2 = 'j';b1 = 'c';b2 = 'h';

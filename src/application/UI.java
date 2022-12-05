@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import chess.CapablancaChessPosition;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -49,7 +50,17 @@ public class UI {
 			throw new InputMismatchException("Error reading chess position. Valid values are from a1 to h8.");
 		}
 	}
-
+	public static ChessPosition readCapablancaChessPosition(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new CapablancaChessPosition(column,row);
+		}
+		catch(RuntimeException e) {
+			throw new InputMismatchException("Error reading chess position. Valid values are from a1 to j8.");
+		}
+	}
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print(ANSI_PURPLE+(8 - i) + " "+ANSI_RESET);
@@ -80,7 +91,7 @@ public class UI {
 	}
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
 		for (int i = 0; i < 8; i++) {
-			System.out.print(ANSI_PURPLE+(9 - i) + " "+ANSI_RESET);
+			System.out.print(ANSI_PURPLE+(8 - i) + " "+ANSI_RESET);
 			for (int j = 0; j < 10; j++) {
 				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
