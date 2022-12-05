@@ -16,7 +16,7 @@ public class Knight extends ChessPiece {
 		return "N";
 	}
 
-	private boolean canMove(Position position) {
+	protected boolean canMove(Position position) {//Changed to protected for Archbishop can properly inherits and use it
 		ChessPiece p = (ChessPiece)getBoard().piece(position);
 		return p == null || p.getColor() != getColor();
 	}
